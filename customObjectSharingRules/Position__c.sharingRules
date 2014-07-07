@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectSharingRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <ownerRules>
+        <fullName>Edit_Positions</fullName>
+        <sharedTo>
+            <roleAndSubordinates>Recruiting_Manager</roleAndSubordinates>
+        </sharedTo>
+        <sharedFrom>
+            <roleAndSubordinates>Recruiting_Manager</roleAndSubordinates>
+        </sharedFrom>
+        <accessLevel>Edit</accessLevel>
+        <name>Edit Positions</name>
+    </ownerRules>
+</CustomObjectSharingRules>
