@@ -9,4 +9,5 @@
     <tab>standard-Coaching</tab>
     <tab>standard-Goal</tab>
     <tab>standard-Perform</tab>
+    <tab>standard-Calibration</tab>
 </CustomApplication>

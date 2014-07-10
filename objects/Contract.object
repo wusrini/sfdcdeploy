@@ -80,6 +80,11 @@
         <type>Lookup</type>
     </fields>
     <fields>
+        <fullName>Pricebook2Id</fullName>
+        <trackHistory>true</trackHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
         <fullName>Status</fullName>
         <picklist>
             <picklistValues>
@@ -179,48 +184,5 @@
         <searchResultsAdditionalFields>CONTRACT.CONTRACT_NUMBER</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>CONTRACT.NAME</searchResultsAdditionalFields>
     </searchLayouts>
-    <sharingModel>Read</sharingModel>
-    <webLinks>
-        <fullName>Mass_Delete</fullName>
-        <availability>online</availability>
-        <displayType>massActionButton</displayType>
-        <linkType>javascript</linkType>
-        <masterLabel>Mass Delete</masterLabel>
-        <openType>onClickJavaScript</openType>
-        <protected>false</protected>
-        <requireRowSelection>true</requireRowSelection>
-        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/9.0/connection.js&quot;)}
-
-var records = {!GETRECORDIDS(  $ObjectType.Contract  )};
-
-if (records[0] == null) {
-alert(&quot;Please select at least one record.&quot;) }
-else {
-
-var errors = [];
-var result = sforce.connection.deleteIds(records);
-if (result &amp;&amp; result.length){
-var numFailed = 0;
-var numSucceeded = 0;
-for (var i = 0; i &lt; result.length; i++){
-var res = result[i];
-if (res &amp;&amp; res.success == &apos;true&apos;){
-numSucceeded++;
-} else {
-var es = res.getArray(&quot;errors&quot;);
-if (es.length &gt; 0) {
-errors.push(es[0].message);
-}
-numFailed++;
-}
-}
-if (numFailed &gt; 0){
-alert(&quot;Failed: &quot; + numFailed + &quot;\nSucceeded: &quot; + numSucceeded + &quot; \n Due to: &quot; + errors.join(&quot;\n&quot;));
-} else {
-alert(&quot;Number of records deleted: &quot; + numSucceeded);
-}
-}
-window.location.reload();
-}</url>
-    </webLinks>
+    <sharingModel>ReadWrite</sharingModel>
 </CustomObject>

@@ -167,6 +167,11 @@
         <type>Lookup</type>
     </fields>
     <listViews>
+        <fullName>AllContacts</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All Contacts</label>
+    </listViews>
+    <listViews>
         <fullName>BirthdaysThisMonth</fullName>
         <filterScope>Everything</filterScope>
         <filters>
@@ -175,6 +180,11 @@
             <value>THIS_MONTH</value>
         </filters>
         <label>Birthdays This Month</label>
+    </listViews>
+    <listViews>
+        <fullName>MyContacts</fullName>
+        <filterScope>Mine</filterScope>
+        <label>My Contacts</label>
     </listViews>
     <listViews>
         <fullName>NewLastWeek</fullName>
@@ -200,7 +210,6 @@
         <customTabListAdditionalFields>FULL_NAME</customTabListAdditionalFields>
         <customTabListAdditionalFields>ACCOUNT.NAME</customTabListAdditionalFields>
         <customTabListAdditionalFields>CONTACT.PHONE1</customTabListAdditionalFields>
-        <listViewButtons>Mass_Delete</listViewButtons>
         <lookupDialogsAdditionalFields>FULL_NAME</lookupDialogsAdditionalFields>
         <lookupDialogsAdditionalFields>ACCOUNT.NAME</lookupDialogsAdditionalFields>
         <lookupDialogsAdditionalFields>ACCOUNT.SITE</lookupDialogsAdditionalFields>
@@ -219,48 +228,5 @@
         <searchResultsAdditionalFields>CONTACT.EMAIL</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>CORE.USERS.ALIAS</searchResultsAdditionalFields>
     </searchLayouts>
-    <sharingModel>Read</sharingModel>
-    <webLinks>
-        <fullName>Mass_Delete</fullName>
-        <availability>online</availability>
-        <displayType>massActionButton</displayType>
-        <linkType>javascript</linkType>
-        <masterLabel>Mass Delete</masterLabel>
-        <openType>onClickJavaScript</openType>
-        <protected>false</protected>
-        <requireRowSelection>true</requireRowSelection>
-        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/9.0/connection.js&quot;)}
-
-var records = {!GETRECORDIDS(   $ObjectType.Contact )};
-
-if (records[0] == null) {
-alert(&quot;Please select at least one record.&quot;) }
-else {
-
-var errors = [];
-var result = sforce.connection.deleteIds(records);
-if (result &amp;&amp; result.length){
-var numFailed = 0;
-var numSucceeded = 0;
-for (var i = 0; i &lt; result.length; i++){
-var res = result[i];
-if (res &amp;&amp; res.success == &apos;true&apos;){
-numSucceeded++;
-} else {
-var es = res.getArray(&quot;errors&quot;);
-if (es.length &gt; 0) {
-errors.push(es[0].message);
-}
-numFailed++;
-}
-}
-if (numFailed &gt; 0){
-alert(&quot;Failed: &quot; + numFailed + &quot;\nSucceeded: &quot; + numSucceeded + &quot; \n Due to: &quot; + errors.join(&quot;\n&quot;));
-} else {
-alert(&quot;Number of records deleted: &quot; + numSucceeded);
-}
-}
-window.location.reload();
-}</url>
-    </webLinks>
+    <sharingModel>ControlledByParent</sharingModel>
 </CustomObject>

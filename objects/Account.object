@@ -143,6 +143,10 @@
         <type>Picklist</type>
     </fields>
     <fields>
+        <fullName>DandbCompanyId</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
         <fullName>Industry</fullName>
         <picklist>
             <picklistValues>
@@ -445,23 +449,6 @@
         <label>All Accounts</label>
     </listViews>
     <listViews>
-        <fullName>Manufacturing_Accounts</fullName>
-        <columns>ACCOUNT.NAME</columns>
-        <columns>ACCOUNT.SITE</columns>
-        <columns>ACCOUNT.ADDRESS1_STATE</columns>
-        <columns>ACCOUNT.PHONE1</columns>
-        <columns>ACCOUNT.TYPE</columns>
-        <columns>CORE.USERS.ALIAS</columns>
-        <columns>ACCOUNT.INDUSTRY</columns>
-        <filterScope>Everything</filterScope>
-        <filters>
-            <field>ACCOUNT.INDUSTRY</field>
-            <operation>equals</operation>
-            <value>Manufacturing</value>
-        </filters>
-        <label>Manufacturing Accounts</label>
-    </listViews>
-    <listViews>
         <fullName>MyAccounts</fullName>
         <filterScope>Mine</filterScope>
         <label>My Accounts</label>
@@ -514,7 +501,7 @@
         <searchResultsAdditionalFields>ACCOUNT.PHONE1</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>CORE.USERS.ALIAS</searchResultsAdditionalFields>
     </searchLayouts>
-    <sharingModel>Read</sharingModel>
+    <sharingModel>ReadWrite</sharingModel>
     <webLinks>
         <fullName>Billing</fullName>
         <availability>online</availability>
@@ -533,66 +520,5 @@
         <showsLocation>true</showsLocation>
         <showsStatus>true</showsStatus>
         <url>http://www.genwatt.com/genwatt/billing.htm?actname={!Account_Name}</url>
-    </webLinks>
-    <webLinks>
-        <fullName>Mass_Delete</fullName>
-        <availability>online</availability>
-        <displayType>massActionButton</displayType>
-        <linkType>javascript</linkType>
-        <masterLabel>Mass Delete</masterLabel>
-        <openType>onClickJavaScript</openType>
-        <protected>false</protected>
-        <requireRowSelection>true</requireRowSelection>
-        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/9.0/connection.js&quot;)}
-
-var records = {!GETRECORDIDS(  $ObjectType.Account )};
-
-if (records[0] == null) {
-alert(&quot;Please select at least one record.&quot;) }
-else {
-
-var errors = [];
-var result = sforce.connection.deleteIds(records);
-if (result &amp;&amp; result.length){
-var numFailed = 0;
-var numSucceeded = 0;
-for (var i = 0; i &lt; result.length; i++){
-var res = result[i];
-if (res &amp;&amp; res.success == &apos;true&apos;){
-numSucceeded++;
-} else {
-var es = res.getArray(&quot;errors&quot;);
-if (es.length &gt; 0) {
-errors.push(es[0].message);
-}
-numFailed++;
-}
-}
-if (numFailed &gt; 0){
-alert(&quot;Failed: &quot; + numFailed + &quot;\nSucceeded: &quot; + numSucceeded + &quot; \n Due to: &quot; + errors.join(&quot;\n&quot;));
-} else {
-alert(&quot;Number of records deleted: &quot; + numSucceeded);
-}
-}
-window.location.reload();
-}</url>
-    </webLinks>
-    <webLinks>
-        <fullName>MyButton</fullName>
-        <availability>online</availability>
-        <displayType>link</displayType>
-        <hasMenubar>false</hasMenubar>
-        <hasScrollbars>true</hasScrollbars>
-        <hasToolbar>false</hasToolbar>
-        <height>600</height>
-        <isResizable>true</isResizable>
-        <linkType>page</linkType>
-        <masterLabel>MyButton</masterLabel>
-        <openType>newWindow</openType>
-        <page>tabbedAccount</page>
-        <position>none</position>
-        <protected>false</protected>
-        <showsLocation>false</showsLocation>
-        <showsStatus>false</showsStatus>
     </webLinks>
 </CustomObject>

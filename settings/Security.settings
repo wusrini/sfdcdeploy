@@ -12,7 +12,7 @@
         <questionRestriction>DoesNotContainPassword</questionRestriction>
     </passwordPolicies>
     <sessionSettings>
-        <disableTimeoutWarning>true</disableTimeoutWarning>
+        <disableTimeoutWarning>false</disableTimeoutWarning>
         <enableCSRFOnGet>true</enableCSRFOnGet>
         <enableCSRFOnPost>true</enableCSRFOnPost>
         <enableCacheAndAutocomplete>true</enableCacheAndAutocomplete>
@@ -22,6 +22,5 @@
         <enableSMSIdentity>true</enableSMSIdentity>
         <forceRelogin>false</forceRelogin>
         <lockSessionsToIp>false</lockSessionsToIp>
-        <sessionTimeout>FourHours</sessionTimeout>
     </sessionSettings>
 </SecuritySettings>
